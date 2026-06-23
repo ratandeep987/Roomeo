@@ -11,7 +11,6 @@ A modern full-stack hotel booking platform built using the MERN Stack with secur
 ![NodeJS](https://img.shields.io/badge/Node.js-Backend-green)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-darkgreen)
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
-![License](https://img.shields.io/badge/License-MIT-yellow)
 
 </div>
 
