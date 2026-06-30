@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password,role } = req.body;
 
     const existingUser = await User.findOne({ email });
        if (existingUser) {
@@ -18,6 +18,7 @@ const registerUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     res.status(201).json({
@@ -99,9 +100,16 @@ const getProfile = async (req, res) => {
     });
   }
 };
+const ownerDashboard = async (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Welcome Owner Dashboard",
+  });
+};
 
 module.exports = {
   registerUser,
   loginUser,
   getProfile,
+  ownerDashboard,
 };
