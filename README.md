@@ -1,149 +1,149 @@
-# 🏨 Roomeo - Full Stack Hotel Booking Platform
+# 🏨 Roomeo – MERN Hotel Booking System (Backend)
 
 <div align="center">
 
-### Book. Manage. Stay.
+### Secure Hotel Booking Backend API built with Node.js, Express & MongoDB
 
-A modern full-stack hotel booking platform built using the MERN Stack with secure authentication, role-based access control, hotel management, room booking, and admin analytics.
-
-![MERN](https://img.shields.io/badge/MERN-FullStack-green)
-![React](https://img.shields.io/badge/React-Frontend-blue)
-![NodeJS](https://img.shields.io/badge/Node.js-Backend-green)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
+![Express](https://img.shields.io/badge/Express.js-Framework-black)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-darkgreen)
 ![JWT](https://img.shields.io/badge/JWT-Authentication-orange)
+![License](https://img.shields.io/badge/Status-In%20Development-blue)
 
 </div>
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-Roomeo is a production-grade hotel booking platform that enables users to discover hotels, explore rooms, make bookings, and manage reservations seamlessly.
+Roomeo is a MERN Stack Hotel Booking System currently under development.
 
-The platform supports multiple user roles including customers, hotel owners, and administrators, each with dedicated functionalities and secure access controls.
+This repository currently contains the complete **Backend REST API**, which supports user authentication, hotel management, room management, and hotel room booking.
 
----
-
-## ✨ Features
-
-### 👤 User Features
-
-* User Registration
-* Secure Login & Logout
-* JWT Authentication
-* Browse Hotels
-* Search Hotels
-* Filter Hotels
-* View Hotel Details
-* View Room Details
-* Book Rooms
-* Cancel Bookings
-* Booking History
-* Responsive Design
+The React frontend is currently under development.
 
 ---
 
-### 🏨 Hotel Owner Features
+# ✨ Current Features
 
-* Add Hotels
-* Edit Hotel Details
-* Add Rooms
-* Manage Room Availability
-* Upload Hotel Images
-* View Bookings
-* Manage Reservations
+## 👤 Authentication
 
----
-
-### 🛡️ Admin Features
-
-* Manage Users
-* Manage Hotels
-* Manage Bookings
-* Dashboard Analytics
-* User Monitoring
-* Platform Management
+- User Registration
+- User Login
+- Password Hashing using bcrypt
+- JWT Authentication
+- Protected Routes
+- Role-Based Authorization
 
 ---
 
-## 🚀 Tech Stack
+## 🏨 Hotel Management
 
-### Frontend
+Hotel Owners can:
 
-* React.js
-* React Router
-* Axios
-* Tailwind CSS
-* Context API
+- Create Hotels
+- View Their Hotels
 
-### Backend
+Public Users can:
 
-* Node.js
-* Express.js
-* MongoDB
-* Mongoose
-
-### Authentication & Security
-
-* JWT Authentication
-* bcrypt Password Hashing
-* Protected Routes
-* Role-Based Access Control (RBAC)
-
-### Development Tools
-
-* Git
-* GitHub
-* Postman
-* VS Code
+- View All Hotels
+- View Hotel Details
 
 ---
 
-## 🏗️ System Architecture
+## 🛏 Room Management
 
-```text
-Client (React)
-      │
-      ▼
+Hotel Owners can:
+
+- Add Rooms
+- Update Rooms
+- Delete Rooms
+
+Public Users can:
+
+- View Rooms by Hotel
+- View Room Details
+
+---
+
+## 📅 Booking Management
+
+Authenticated Users can:
+
+- Book Available Rooms
+- Prevent Double Booking
+- View Booking History
+- View Booking Details
+- Cancel Future Bookings
+
+---
+
+# 🚀 Tech Stack
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+
+## Authentication
+
+- JWT
+- bcryptjs
+
+## Tools
+
+- Git
+- GitHub
+- Postman
+- VS Code
+
+---
+
+# 🏗 Project Architecture
+
+```
+Client (Frontend)
+        │
  REST API Requests
+        │
+        ▼
+Express Server
+        │
+ ┌──────┼─────────┐
+ │      │         │
+Auth  Hotels   Bookings
+        │
+        ▼
+    MongoDB
+```
+
+---
+
+# 🔐 Authentication Flow
+
+```
+User Login
       │
       ▼
-Express Server
-      │
- ┌────┼────┐
- ▼    ▼    ▼
-Auth Hotels Bookings
- │     │      │
- └─────┼──────┘
-       ▼
-   MongoDB
-```
-
----
-
-## 🔐 Authentication Flow
-
-```text
-User Login
-     │
-     ▼
 Verify Credentials
-     │
-     ▼
+      │
+      ▼
 Generate JWT Token
-     │
-     ▼
-Send Token to Client
-     │
-     ▼
-Protected Route Access
+      │
+      ▼
+Send Token
+      │
+      ▼
+Access Protected APIs
 ```
 
 ---
 
-## 🗄️ Database Design
+# 🗄 Database Models
 
-### User
+## User
 
 ```javascript
 {
@@ -154,39 +154,41 @@ Protected Route Access
 }
 ```
 
-### Hotel
+## Hotel
 
 ```javascript
 {
   name,
   description,
-  location,
-  images,
+  address,
+  city,
+  country,
   owner
 }
 ```
 
-### Room
+## Room
 
 ```javascript
 {
-  hotel,
-  roomType,
+  roomNumber,
+  type,
   price,
   capacity,
-  availability
+  description,
+  isAvailable,
+  hotel
 }
 ```
 
-### Booking
+## Booking
 
 ```javascript
 {
   user,
-  hotel,
   room,
-  checkIn,
-  checkOut,
+  checkInDate,
+  checkOutDate,
   totalPrice,
   status
 }
@@ -194,92 +196,74 @@ Protected Route Access
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
-```text
-Roomeo
+```
+server
 │
-├── client
-│   ├── src
-│   │   ├── assets
-│   │   ├── components
-│   │   ├── pages
-│   │   ├── layouts
-│   │   ├── services
-│   │   ├── hooks
-│   │   ├── context
-│   │   └── utils
+├── src
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   ├── app.js
 │
-├── server
-│   ├── src
-│   │   ├── config
-│   │   ├── controllers
-│   │   ├── middleware
-│   │   ├── models
-│   │   ├── routes
-│   │   ├── services
-│   │   └── utils
-│   │
-│   ├── .env
-│   ├── server.js
-│   └── package.json
-│
+├── .env
+├── server.js
+├── package.json
 └── README.md
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙ Installation
 
-### Clone Repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/Roomeo.git
-
-cd Roomeo
+git clone https://github.com/ratandeep987/Roomeo.git
 ```
 
-### Backend Setup
+Move into the project
 
 ```bash
-cd server
-
-npm install
-
-npm run dev
+cd Roomeo/server
 ```
 
-### Frontend Setup
+Install dependencies
 
 ```bash
-cd client
-
 npm install
+```
 
+Run the server
+
+```bash
 npm run dev
 ```
 
 ---
 
-## 🔑 Environment Variables
+# 🔑 Environment Variables
 
-Create a `.env` file inside the server directory:
+Create a `.env` file inside the **server** folder.
 
 ```env
 PORT=5000
 
 MONGO_URI=your_mongodb_connection_string
 
-JWT_SECRET=your_super_secret_key
+JWT_SECRET=your_secret_key
 ```
 
 ---
 
-## 📬 API Endpoints
+# 📬 API Endpoints
 
-### Authentication
+## Authentication
 
-```http
+```
 POST /api/auth/register
 
 POST /api/auth/login
@@ -287,82 +271,105 @@ POST /api/auth/login
 GET /api/auth/profile
 ```
 
-### Hotels
+---
 
-```http
+## Hotels
+
+```
 GET /api/hotels
 
 GET /api/hotels/:id
 
+GET /api/hotels/my-hotels
+
 POST /api/hotels
-
-PUT /api/hotels/:id
-
-DELETE /api/hotels/:id
 ```
 
-### Bookings
+---
 
-```http
+## Rooms
+
+```
+GET /api/rooms/hotel/:hotelId
+
+GET /api/rooms/:id
+
+POST /api/rooms
+
+PUT /api/rooms/:id
+
+DELETE /api/rooms/:id
+```
+
+---
+
+## Bookings
+
+```
 POST /api/bookings
 
-GET /api/bookings/my-bookings
+GET /api/bookings/my
 
-DELETE /api/bookings/:id
+GET /api/bookings/:id
+
+PUT /api/bookings/:id/cancel
 ```
 
 ---
 
-## 🔒 Security Features
+# 🔒 Security Features
 
-* Password Hashing with bcrypt
-* JWT Authentication
-* Protected Routes
-* Role-Based Authorization
-* Input Validation
-* Error Handling
-* Secure Environment Variables
-
----
-
-## 📈 Future Enhancements
-
-* Payment Gateway Integration
-* Email Notifications
-* Hotel Reviews & Ratings
-* Wishlist Feature
-* Real-time Availability Tracking
-* AI-Based Hotel Recommendations
-* Admin Analytics Dashboard
-* Cloud Image Storage
+- JWT Authentication
+- Password Hashing using bcrypt
+- Protected Routes
+- Role-Based Authorization
+- Mongoose Validation
+- Secure Environment Variables
 
 ---
 
-## 🎯 Learning Outcomes
+# 🚧 Upcoming Features
 
-Through this project I learned:
-
-* MERN Stack Development
-* REST API Design
-* JWT Authentication
-* MongoDB Data Modeling
-* Backend Architecture
-* Protected Routes
-* Role-Based Access Control
-* Full Stack Application Development
-* Git & GitHub Workflow
-* Production-Level Project Structure
+- React Frontend
+- Responsive UI
+- Image Upload
+- Hotel Search & Filters
+- Payment Integration
+- Booking Calendar
+- Owner Dashboard UI
+- Deployment
 
 ---
 
-## 👨‍💻 Author
+# 📚 What I Learned
+
+This project helped me understand:
+
+- REST API Development
+- Express.js
+- MongoDB & Mongoose
+- JWT Authentication
+- Password Hashing
+- MVC Architecture
+- Role-Based Access Control (RBAC)
+- CRUD Operations
+- API Testing using Postman
+- Git & GitHub Workflow
+
+---
+
+# 👨‍💻 Author
 
 **Ratan Deep**
 
-B.Tech CSIT (2023–2027)
+B.Tech in Computer Science & Information Technology (2023–2027)
 
-Passionate about Full Stack Development, Software Engineering, and Building Scalable Web Applications.
+GitHub: https://github.com/ratandeep987
 
 ---
 
-⭐ If you like this project, consider giving it a star.
+## ⭐ Project Status
+
+🚧 **Backend Completed**
+
+🚀 **Frontend Development In Progress**
