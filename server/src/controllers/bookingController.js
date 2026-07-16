@@ -1,5 +1,5 @@
-const Booking = require("../models/Booking");
-const Room = require("../models/Room");
+const Booking = require("../models/booking");
+const Room = require("../models/room");
 
 const createBooking = async (req, res) => {
   try {
@@ -78,6 +78,7 @@ const createBooking = async (req, res) => {
     });
   }
 };
+
 const getMyBookings = async (req, res) => {
   try {
     // Write the logic here
@@ -96,6 +97,7 @@ const getMyBookings = async (req, res) => {
     });
   }
 };
+
 const cancelBooking = async (req, res) => {
   try {
     // 1. Find booking
