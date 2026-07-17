@@ -1,11 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@import"tailwindcss"; 
-*{
-  font-family: outfit;
-
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+  /* Keep focus states visible for keyboard users */
+  :focus-visible {
+    outline: 2px solid theme("colors.brass.500");
+    outline-offset: 2px;
+  }
 }
 
-.font-playfair{
-  font-family: playfair !important;
+@layer components {
+  /* Signature element: the "key tag" — a badge shaped like a hotel room-key
+     fob with a punched circle, used for room types, statuses, and counts
+     throughout the app. */
+  .key-tag {
+    @apply relative inline-flex items-center gap-2 rounded-tag bg-ink-800 text-paper text-xs font-mono tracking-wide uppercase px-3 py-1.5 pl-5;
+  }
+  .key-tag::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: theme("colors.paper");
+    box-shadow: inset 0 0 0 1px theme("colors.ink.800");
+  }
 }
