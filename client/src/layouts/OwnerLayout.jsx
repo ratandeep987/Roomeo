@@ -1,11 +1,17 @@
 import { NavLink, Outlet } from "react-router-dom";
+import dashboardIcon from "../assets/dashboardIcon.svg";
+import listIcon from "../assets/listIcon.svg";
+import addIcon from "../assets/addIcon.svg";
 
 const linkClass = ({ isActive }) =>
-  `block rounded-tag px-3.5 py-2.5 text-sm font-medium transition-colors ${
+  `flex items-center gap-2.5 rounded-tag px-3.5 py-2.5 text-sm font-medium transition-all ${
     isActive
-      ? "bg-ink-800 text-paper"
+      ? "bg-ink-800 text-paper shadow-card"
       : "text-ink-600 hover:bg-ink-50 hover:text-ink-800"
   }`;
+
+const iconClass = (isActive) =>
+  `h-4 w-4 shrink-0 [filter:brightness(0)] ${isActive ? "invert" : "opacity-50"}`;
 
 /**
  * Shared shell for every /owner/* route: a sidebar (Dashboard, My Hotels,
@@ -26,13 +32,28 @@ const OwnerLayout = () => {
         <aside className="lg:w-56 lg:shrink-0">
           <nav className="flex flex-row gap-2 overflow-x-auto lg:flex-col lg:overflow-visible">
             <NavLink to="/owner/dashboard" className={linkClass} end>
-              Dashboard
+              {({ isActive }) => (
+                <>
+                  <img src={dashboardIcon} alt="" className={iconClass(isActive)} />
+                  Dashboard
+                </>
+              )}
             </NavLink>
             <NavLink to="/owner/hotels" className={linkClass}>
-              My Hotels
+              {({ isActive }) => (
+                <>
+                  <img src={listIcon} alt="" className={iconClass(isActive)} />
+                  My Hotels
+                </>
+              )}
             </NavLink>
             <NavLink to="/owner/hotels/new" className={linkClass}>
-              List a hotel
+              {({ isActive }) => (
+                <>
+                  <img src={addIcon} alt="" className={iconClass(isActive)} />
+                  List a hotel
+                </>
+              )}
             </NavLink>
           </nav>
         </aside>

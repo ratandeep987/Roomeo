@@ -65,7 +65,7 @@ const Hotels = () => {
           {Array.from({ length: 6 }).map((_, i) => (
             <div
               key={i}
-              className="h-64 animate-pulse rounded-lg border border-ink-100 bg-ink-50"
+              className="h-64 animate-pulse rounded-xl border border-ink-100 bg-ink-50"
             />
           ))}
         </div>
@@ -93,8 +93,12 @@ const Hotels = () => {
 
       {!loading && !error && filteredHotels.length > 0 && (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredHotels.map((hotel) => (
-            <HotelCard key={hotel._id} hotel={hotel} />
+          {filteredHotels.map((hotel, i) => (
+            <HotelCard
+              key={hotel._id}
+              hotel={hotel}
+              style={{ animationDelay: `${(i % 6) * 80}ms` }}
+            />
           ))}
         </div>
       )}

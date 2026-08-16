@@ -1,4 +1,15 @@
 import { Link } from "react-router-dom";
+import facebookIcon from "../assets/facebookIcon.svg";
+import instagramIcon from "../assets/instagramIcon.svg";
+import twitterIcon from "../assets/twitterIcon.svg";
+import linkedinIcon from "../assets/linkendinIcon.svg";
+
+const socials = [
+  { icon: facebookIcon, label: "Facebook" },
+  { icon: instagramIcon, label: "Instagram" },
+  { icon: twitterIcon, label: "Twitter" },
+  { icon: linkedinIcon, label: "LinkedIn" },
+];
 
 const Footer = () => {
   return (
@@ -18,6 +29,23 @@ const Footer = () => {
               Book rooms directly from the hotels that run them. No middleman
               markup, no fine print.
             </p>
+            <div className="mt-5 flex gap-3">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href="#"
+                  aria-label={s.label}
+                  onClick={(e) => e.preventDefault()}
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-ink-700 transition-colors hover:bg-brass-500"
+                >
+                  <img
+                    src={s.icon}
+                    alt=""
+                    className="h-3.5 w-3.5 [filter:brightness(0)_invert(1)]"
+                  />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">

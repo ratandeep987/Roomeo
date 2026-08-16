@@ -5,6 +5,7 @@ import react from "@vitejs/plugin-react";
 // frontend never needs a hardcoded absolute URL in development.
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ["**/*.avif"],
   server: {
     port: 5173,
     proxy: {

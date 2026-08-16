@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useApp } from "../context/AppContext";
+import regImage from "../assets/regImage.png";
 
 const Login = () => {
   const { login } = useApp();
@@ -38,8 +39,12 @@ const Login = () => {
   };
 
   return (
-    <div className="mx-auto flex min-h-[80vh] max-w-md flex-col justify-center px-4 py-16 sm:px-6">
-      <div className="mb-8 text-center">
+    <div className="mx-auto grid min-h-[85vh] max-w-5xl grid-cols-1 items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
+      <div className="hidden animate-fade-up overflow-hidden rounded-2xl shadow-lift lg:block">
+        <img src={regImage} alt="" className="h-full max-h-[560px] w-full object-cover" />
+      </div>
+
+      <div className="w-full max-w-md animate-fade-up lg:mx-auto">
         <span className="key-tag mb-4 inline-flex">Welcome back</span>
         <h1 className="mt-3 font-display text-3xl font-semibold text-ink-800">
           Sign in to Roomeo
@@ -47,67 +52,67 @@ const Login = () => {
         <p className="mt-2 text-sm text-ink-500">
           Access your bookings or manage your hotels.
         </p>
-      </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="rounded-lg border border-ink-100 bg-white p-6 shadow-card sm:p-8"
-      >
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-1.5 block text-sm font-medium text-ink-700"
-            >
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="w-full rounded-tag border border-ink-200 px-3.5 py-2.5 text-sm text-ink-800 outline-none transition-colors placeholder:text-ink-300 focus:border-brass-500"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="mb-1.5 block text-sm font-medium text-ink-700"
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              value={form.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              className="w-full rounded-tag border border-ink-200 px-3.5 py-2.5 text-sm text-ink-800 outline-none transition-colors placeholder:text-ink-300 focus:border-brass-500"
-            />
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          disabled={submitting}
-          className="mt-6 w-full rounded-tag bg-ink-800 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-ink-700 disabled:cursor-not-allowed disabled:opacity-60"
+        <form
+          onSubmit={handleSubmit}
+          className="mt-8 rounded-xl border border-ink-100 bg-white p-6 shadow-card sm:p-8"
         >
-          {submitting ? "Signing in…" : "Sign in"}
-        </button>
+          <div className="space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="mb-1.5 block text-sm font-medium text-ink-700"
+              >
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                className="w-full rounded-tag border border-ink-200 px-3.5 py-2.5 text-sm text-ink-800 outline-none transition-colors placeholder:text-ink-300 focus:border-brass-500"
+              />
+            </div>
 
-        <p className="mt-5 text-center text-sm text-ink-500">
-          Don't have an account?{" "}
-          <Link to="/register" className="font-medium text-brass-600 hover:text-brass-700">
-            Create one
-          </Link>
-        </p>
-      </form>
+            <div>
+              <label
+                htmlFor="password"
+                className="mb-1.5 block text-sm font-medium text-ink-700"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                value={form.password}
+                onChange={handleChange}
+                placeholder="••••••••"
+                className="w-full rounded-tag border border-ink-200 px-3.5 py-2.5 text-sm text-ink-800 outline-none transition-colors placeholder:text-ink-300 focus:border-brass-500"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="mt-6 w-full rounded-tag bg-ink-800 py-2.5 text-sm font-medium text-paper transition-all hover:-translate-y-0.5 hover:bg-ink-700 hover:shadow-lift disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+          >
+            {submitting ? "Signing in…" : "Sign in"}
+          </button>
+
+          <p className="mt-5 text-center text-sm text-ink-500">
+            Don't have an account?{" "}
+            <Link to="/register" className="font-medium text-brass-600 hover:text-brass-700">
+              Create one
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

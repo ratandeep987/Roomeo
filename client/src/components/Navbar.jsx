@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import menuIcon from "../assets/menuIcon.svg";
+import closeMenu from "../assets/closeMenu.svg";
+import userIcon from "../assets/userIcon.svg";
 
 const navLinkClass = ({ isActive }) =>
-  `text-sm font-medium transition-colors ${
-    isActive ? "text-brass-600" : "text-ink-500 hover:text-ink-800"
+  `relative py-1 text-sm font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:rounded-full after:bg-brass-500 after:transition-all after:duration-300 ${
+    isActive
+      ? "text-ink-900 after:w-full"
+      : "text-ink-500 after:w-0 hover:text-ink-800 hover:after:w-full"
   }`;
 
 const Navbar = () => {
@@ -22,7 +27,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-40 border-b border-ink-100 bg-paper/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-tag bg-ink-800 font-mono text-xs font-semibold text-brass-300">
+          <span className="flex h-8 w-8 items-center justify-center rounded-tag bg-ink-800 font-mono text-xs font-semibold text-brass-300 transition-transform hover:rotate-3">
             R
           </span>
           <span className="font-display text-xl font-semibold tracking-tight text-ink-800">
@@ -57,12 +62,17 @@ const Navbar = () => {
         <div className="hidden items-center gap-3 md:flex">
           {isAuthenticated ? (
             <>
-              <span className="text-sm text-ink-500">
-                Hi, <span className="font-medium text-ink-800">{user.name}</span>
+              <span className="flex items-center gap-1.5 text-sm text-ink-500">
+                <img
+                  src={userIcon}
+                  alt=""
+                  className="h-4 w-4 [filter:brightness(0)] opacity-40"
+                />
+                <span className="font-medium text-ink-800">{user.name}</span>
               </span>
               <button
                 onClick={handleLogout}
-                className="rounded-tag border border-ink-200 px-4 py-2 text-sm font-medium text-ink-700 transition-colors hover:border-ink-800 hover:text-ink-900"
+                className="rounded-tag border border-ink-200 px-4 py-2 text-sm font-medium text-ink-700 transition-all hover:-translate-y-0.5 hover:border-ink-800 hover:text-ink-900"
               >
                 Sign out
               </button>
@@ -77,7 +87,7 @@ const Navbar = () => {
               </Link>
               <Link
                 to="/register"
-                className="rounded-tag bg-ink-800 px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-ink-700"
+                className="rounded-tag bg-ink-800 px-4 py-2 text-sm font-medium text-paper transition-all hover:-translate-y-0.5 hover:bg-ink-700 hover:shadow-lift"
               >
                 Get started
               </Link>
@@ -90,17 +100,16 @@ const Navbar = () => {
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          <span className="sr-only">Menu</span>
-          <div className="space-y-1.5">
-            <span className="block h-0.5 w-5 bg-ink-800" />
-            <span className="block h-0.5 w-5 bg-ink-800" />
-            <span className="block h-0.5 w-5 bg-ink-800" />
-          </div>
+          <img
+            src={menuOpen ? closeMenu : menuIcon}
+            alt=""
+            className="h-4 w-4 [filter:brightness(0)]"
+          />
         </button>
       </div>
 
       {menuOpen && (
-        <div className="border-t border-ink-100 bg-paper px-4 pb-4 pt-2 md:hidden">
+        <div className="animate-fade-in border-t border-ink-100 bg-paper px-4 pb-4 pt-2 md:hidden">
           <div className="flex flex-col gap-3">
             <NavLink to="/" end className={navLinkClass} onClick={() => setMenuOpen(false)}>
               Home
